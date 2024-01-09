@@ -22,8 +22,11 @@ import { obterCategorias } from "../http/index";
 export default defineComponent({
   data() {
     return {
-      categorias: obterCategorias(),
+      categorias: [],
     };
+  },
+  async created() {
+    this.categorias = await obterCategorias();
   },
   setup() {},
 });
