@@ -1,35 +1,34 @@
 <template>
-  <section class="selecionar-ingredientes">
-    <h1 class="cabecalho titulo-ingredientes">Ingredientes</h1>
-    <p class="paragrafo-lg instrucoes">
-      Selecione abaixo os ingredientes que você quer usar nesta receita:
-    </p>
-
-    <ul class="categorias">
-      <li v-for="categoria in categorias" :key="categoria.nome">
-        {{ categoria.nome }}
-      </li>
-    </ul>
-    <p class="paragrafo dica">
-      *Atenção: consideramos que você tem em casa sal, pimenta e água.
-    </p>
-  </section>
+<section class="selecionar-ingredientes">
+  <h1 class="cabecalho titulo-ingredientes">Ingredientes</h1>
+  <p class="paragrafo-lg instrucoes">
+    Selecione abaixo os ingredientes que voce uer usar nesta receita:
+  </p>
+  <ul class="categorias">
+    <li v-for="categoria in categorias" :key="categoria.nome" >
+      {{ categoria.nome }}
+    </li>
+  </ul>
+  <p class="paragrafo dica">
+    *Atenção: Consideramos que voce tenha em casa sal, pimenta e alho.
+  </p>
+</section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { obterCategorias } from "../http/index";
-export default defineComponent({
+import { obterCategorias } from '@/http';
+
+export default {
   data() {
     return {
-      categorias: [],
-    };
+      categorias: []
+    }
   },
   async created() {
     this.categorias = await obterCategorias();
   },
-  setup() {},
-});
+
+}
 </script>
 
 <style scoped>
@@ -40,7 +39,7 @@ export default defineComponent({
 }
 
 .titulo-ingredientes {
-  color: var(--verde-medio, #3d6d4a);
+  color: var(--verde-medio, #3D6D4A);
   display: block;
   margin-bottom: 1.5rem;
 }
@@ -67,4 +66,5 @@ export default defineComponent({
     margin-bottom: 2.5rem;
   }
 }
+
 </style>
