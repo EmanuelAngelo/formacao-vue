@@ -6,7 +6,7 @@
   </p>
   <ul class="categorias">
     <li v-for="categoria in categorias" :key="categoria.nome" >
-      {{ categoria.nome }}
+      <CardCategoria :categoria="categoria" />
     </li>
   </ul>
   <p class="paragrafo dica">
@@ -16,17 +16,20 @@
 </template>
 
 <script lang="ts">
+import type ICategoria from '@/interfaces/ICategoria';
 import { obterCategorias } from '@/http';
+import CardCategoria from './CardCategoria.vue';
 
 export default {
   data() {
     return {
-      categorias: []
+      categorias: [] as ICategoria[]
     }
   },
   async created() {
     this.categorias = await obterCategorias();
   },
+  components: {CardCategoria}
 
 }
 </script>
