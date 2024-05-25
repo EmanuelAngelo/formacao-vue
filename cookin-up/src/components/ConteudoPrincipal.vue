@@ -1,41 +1,43 @@
 <template>
-<main class="conteudo-principal">
-  <section>
-    <span class="subtitulo-lg sua-lista-texto">
-      Sua lista:
-    </span>
-    <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
-      <li v-for="ingrediente in ingredientes" :key="ingrediente" class="ingrediente">
-        {{ ingrediente }}
-      </li>
-    </ul>
-    <p v-else class="paragrafo lista-vazia">
-      <img src="../assets/images/icones/lista-vazia.svg" alt="">
-      Sua lista esta vazia, selecione ingredientes para começar.
-    </p>
-  </section>
-  <SelecionarIngredientes />
-</main>
+  <main class="conteudo-principal">
+    <section>
+      <span class="subtitulo-lg sua-lista-texto"> Sua lista: </span>
+      <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
+        <li v-for="ingrediente in ingredientes" :key="ingrediente">
+          <Tag :texto="ingrediente" :ativa="true" />
+        </li>
+      </ul>
+      <p v-else class="paragrafo lista-vazia">
+        <img src="../assets/images/icones/lista-vazia.svg" alt="" />
+        Sua lista esta vazia, selecione ingredientes para começar.
+      </p>
+    </section>
+    <SelecionarIngredientes />
+  </main>
 </template>
 
 <script lang="ts">
-import SelecionarIngredientes from './SelecionarIngredientes.vue';
+import SelecionarIngredientes from "./SelecionarIngredientes.vue";
+import Tag from "./Tag.vue";
 
 export default {
   data() {
     return {
-      ingredientes: ['Alho', 'Manteiga', 'Orégano']
-    }
+      ingredientes: ["Alho", "Manteiga", "Orégano"],
+    };
   },
-  components: {SelecionarIngredientes}
-}
+  components: {
+    SelecionarIngredientes,
+    Tag,
+  },
+};
 </script>
 
 <style scoped>
 .conteudo-principal {
   padding: 6.5rem 7.5rem;
   border-radius: 3.75rem 3.75rem 0rem 0rem;
-  background: var(--creme, #FFFAF3);
+  background: var(--creme, #fffaf3);
   color: var(--cinza, #444);
 
   display: flex;
@@ -45,7 +47,7 @@ export default {
 }
 
 .sua-lista-texto {
-  color: var(--coral, #F0633C);
+  color: var(--coral, #f0633c);
   display: block;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -58,18 +60,6 @@ export default {
   flex-wrap: wrap;
 }
 
-.ingrediente {
-  display: inline-block;
-  border-radius: 0.5rem;
-  min-width: 4.25rem;
-  padding: 0.5rem;
-  text-align: center;
-  transition: 0.2s;
-  color: var(--creme, #FFFAF3);
-  background: var(--coral, #F0633C);
-  font-weight: 700;
-}
-
 .lista-vazia {
   display: flex;
   justify-content: center;
@@ -77,7 +67,7 @@ export default {
   flex-wrap: wrap;
   gap: 0.25rem;
 
-  color: var(--coral, #F0633C);
+  color: var(--coral, #f0633c);
   text-align: center;
 }
 
