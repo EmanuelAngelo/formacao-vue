@@ -1,37 +1,41 @@
 <template>
-<section class="selecionar-ingredientes">
-  <h1 class="cabecalho titulo-ingredientes">Ingredientes</h1>
-  <p class="paragrafo-lg instrucoes">
-    Selecione abaixo os ingredientes que voce uer usar nesta receita:
-  </p>
-  <ul class="categorias">
-    <li v-for="categoria in categorias" :key="categoria.nome" >
-      <CardCategoria :categoria="categoria" />
-    </li>
-  </ul>
-  <p class="paragrafo dica">
-    *Atenção: Consideramos que voce tenha em casa sal, pimenta e alho.
-  </p>
-</section>
+  <section class="selecionar-ingredientes">
+    <h1 class="cabecalho titulo-ingredientes">Ingredientes</h1>
+    <p class="paragrafo-lg instrucoes">
+      Selecione abaixo os ingredientes que voce uer usar nesta receita:
+    </p>
+    <ul class="categorias">
+      <li v-for="categoria in categorias" :key="categoria.nome">
+        <CardCategoria
+          :categoria="categoria"
+          @adicionarIngrediente="$emit('adicionarIngrediente', $event)"
+          @removerIngrediente="$emit('removerIngrediente', $event)"
+        />
+      </li>
+    </ul>
+    <p class="paragrafo dica">
+      *Atenção: Consideramos que voce tenha em casa sal, pimenta e alho.
+    </p>
+  </section>
 </template>
 
 <script lang="ts">
-import type ICategoria from '@/interfaces/ICategoria';
-import { obterCategorias } from '@/http';
-import CardCategoria from './CardCategoria.vue';
+import type ICategoria from "@/interfaces/ICategoria";
+import { obterCategorias } from "@/http";
+import CardCategoria from "./CardCategoria.vue";
 
 export default {
   data() {
     return {
-      categorias: [] as ICategoria[]
-    }
+      categorias: [] as ICategoria[],
+    };
   },
   async created() {
     this.categorias = await obterCategorias();
   },
-  components: {CardCategoria}
-
-}
+  components: { CardCategoria },
+  emits: ["adicionarIngrediente", "removerIngrediente"],
+};
 </script>
 
 <style scoped>
@@ -42,7 +46,7 @@ export default {
 }
 
 .titulo-ingredientes {
-  color: var(--verde-medio, #3D6D4A);
+  color: var(--verde-medio, #3d6d4a);
   display: block;
   margin-bottom: 1.5rem;
 }
@@ -69,5 +73,4 @@ export default {
     margin-bottom: 2.5rem;
   }
 }
-
 </style>

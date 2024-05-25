@@ -11,7 +11,11 @@
     </header>
     <ul class="categoria__ingredientes">
       <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-        <IngredienteSelecionavel :ingrediente="ingrediente" />
+        <IngredienteSelecionavel
+          :ingrediente="ingrediente"
+          @adicionarIngrediente="$emit('adicionarIngrediente', $event)"
+          @removerIngrediente="$emit('removerIngrediente', $event)"
+        />
       </li>
     </ul>
   </article>
@@ -30,6 +34,7 @@ export default {
       required: true,
     },
   },
+  emits: ["adicionarIngrediente", "removerIngrediente"],
 };
 </script>
 <style scoped>

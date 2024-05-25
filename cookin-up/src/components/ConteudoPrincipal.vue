@@ -12,7 +12,10 @@
         Sua lista esta vazia, selecione ingredientes para começar.
       </p>
     </section>
-    <SelecionarIngredientes />
+    <SelecionarIngredientes
+      @adicionarIngrediente="adicionarIngrediente"
+      @removerIngrediente="removerIngrediente"
+    />
   </main>
 </template>
 
@@ -23,12 +26,22 @@ import Tag from "./Tag.vue";
 export default {
   data() {
     return {
-      ingredientes: ["Alho", "Manteiga", "Orégano"],
+      ingredientes: [] as string[],
     };
   },
   components: {
     SelecionarIngredientes,
     Tag,
+  },
+  methods: {
+    adicionarIngrediente(ingrediente: string) {
+      this.ingredientes.push(ingrediente);
+    },
+    removerIngrediente(ingrediente: string) {
+      this.ingredientes = this.ingredientes.filter(
+        (iLista) => ingrediente !== iLista
+      );
+    },
   },
 };
 </script>
